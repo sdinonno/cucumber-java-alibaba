@@ -5,7 +5,7 @@ Feature: Search product
     Given that I have gone to the Alibaba page
     When I input "Iphone" to search box
     And click the search button
-    And I go to the second results page
-    Then the second ad has at least "1" item
+    And click the second result
+    Then I see has at least "1" item
 
 

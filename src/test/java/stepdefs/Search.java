@@ -1,13 +1,17 @@
 package stepdefs;
 
+import framework.CommonMethods;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class Search {
+
+
     @Given("that I have gone to the Alibaba page")
     public void thatIHaveGoneToTheAlibabaPage() {
+
     }
 
     @When("I input \"Iphone\" to search box")
@@ -20,12 +24,13 @@ public class Search {
         
     }
 
-    @And("I go to the second results page")
-    public void iGoToTheSecondResultsPage() {
+    @And("click the second result")
+    public void clickTheSecondResult() {
         
     }
 
-    @Then("the second ad has at least \"1\" item")
-    public void theSecondAdHasAtLeastNumberItem() {
+    @Then("I see has at least \"1\" item")
+    public void iSeeHasAt1Item() {
+
     }
 }
