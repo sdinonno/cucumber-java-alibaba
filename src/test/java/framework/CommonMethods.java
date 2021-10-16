@@ -1,6 +1,5 @@
 package framework;
 
-import org.omg.CORBA.SystemException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,17 +9,17 @@ import java.util.List;
 
 public class CommonMethods {
 
-    WebDriver driver;
+    static WebDriver driver;
 
     public CommonMethods(WebDriver driver){
         this.driver = driver;
     }
 
-    public void navigate(String url){
+    public static void navigate(String url){
         driver.navigate().to(url);
     }
 
-    public WebElement findElement(By locator){
+    public static WebElement findElement(By locator){
         try {
             WebElement element = driver.findElement(locator);
             return element;
@@ -31,7 +30,7 @@ public class CommonMethods {
         }
     }
 
-    public List<WebElement> findElements(By locator){
+    public static List<WebElement> findElements(By locator){
         try {
             List<WebElement> element = driver.findElements(locator);
             return element;
@@ -42,7 +41,7 @@ public class CommonMethods {
         }
     }
 
-    public void clickOnContainingValue(List<WebElement> elements, String valueToBeContained){
+    public static void clickOnContainingValue(List<WebElement> elements, String valueToBeContained){
         for (WebElement element : elements) {
             if (element.getText().toLowerCase().contains(valueToBeContained.toLowerCase())) {
                 element.click();
@@ -51,14 +50,41 @@ public class CommonMethods {
         }
     }
 
-    public void inputText(By locator, String text){
+    public static void inputText(By locator, String text){
         try {
-            driver.findElement(locator).sendKeys(text);
+            findElement(locator).sendKeys(text);
         }
         catch (Exception e) {
             System.out.println("Error trying to enter text.");
             throw new NoSuchElementException(e.getMessage());
         }
+    }
+
+    public static void clickElement(By locator){
+        try{
+            findElement(locator).click();
+        }
+        catch (Exception e) {
+            System.out.println("Error trying to click element.");
+            throw new NoSuchElementException(e.getMessage());
+        }
+    }
+
+    public static boolean elementIsVisible(By locator){
+        try {
+            findElement(locator).isDisplayed();
+            return true;
+        }
+        catch (Exception e){
+            System.out.println("Error trying to find element.");
+            throw new NoSuchElementException(e.getMessage());
+        }
+
+    }
+
+    public static String getValueOnInput(By locator){
+        String valueInput = findElement(locator).getCssValue("value");
+        return valueInput;
     }
 
 
