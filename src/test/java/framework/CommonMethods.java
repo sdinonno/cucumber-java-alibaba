@@ -12,6 +12,14 @@ public class CommonMethods {
 
     WebDriver driver;
 
+    public CommonMethods(WebDriver driver){
+        this.driver = driver;
+    }
+
+    public void navigate(String url){
+        driver.navigate().to(url);
+    }
+
     public WebElement findElement(By locator){
         try {
             WebElement element = driver.findElement(locator);
