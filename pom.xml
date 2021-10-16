@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>cucumber-java-alibaba</name>
-  <url>https://www.alibaba.com/</url>
+  <url>https://www.aliexpress.com/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
