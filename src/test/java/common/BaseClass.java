@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class BaseClass {
 
@@ -19,19 +21,21 @@ public class BaseClass {
                 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-gpu","--ignore-certificate-errors");
+
                 driver = new ChromeDriver(options);
                 driver.manage().window().maximize();
                 driver.get(url);
-
+                driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         }
 
         public void quit(){
-                driver.close();
+                close();
                 driver.quit();
         }
 
         public void navigate(String url){
                 driver.navigate().to(url);
+                driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         }
 
         public WebElement findElement(By locator){
@@ -102,6 +106,25 @@ public class BaseClass {
                 }
         }
 
+        public void switchTo(String window){
+                driver.switchTo().window(window);
+        }
+
+        public String getWindowHandle(){
+                return driver.getWindowHandle();
+        }
+
+        public Set<String> getWindowHandles(){
+                return driver.getWindowHandles();
+        }
+
+        public String getCurrentUrl(){
+                return driver.getCurrentUrl();
+        }
+
+        public String close(){
+                driver.close();
+        }
 
 }
 
