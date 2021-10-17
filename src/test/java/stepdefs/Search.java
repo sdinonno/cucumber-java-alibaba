@@ -6,19 +6,23 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import pages.HomePage;
+import framework.Base;
 
 import java.util.List;
 
-public class Search {
+public class Search extends Base {
 
 
-    @Given("that I have gone to the Alibaba page")
-    public void thatIHaveGoneToTheAlibabaPage() {
-        HomePage.navigate("https://aliexpress.com/");
+    @Given("that I am on the Aliexpress website")
+    public void thatIAmOnTheAliexpressWebsite() {
+        setUp("https://aliexpress.com/");
+        HomePage.clickElement(HomePage.dontAllowNotificationsButton);
+        HomePage.clickElement(HomePage.closeDiscountButton);
     }
 
-    @When("I input \"Iphone\" to search box")
+    @When("I input {string} to search box")
     public void iInputWordToSearchBox(String word) {
         HomePage.inputText(HomePage.searchBox, word);
     }
@@ -39,12 +43,13 @@ public class Search {
         HomePage.clickElement(HomePage.secondProduct);
     }
 
-    @Then("I see has at least \"1\" item")
+    @Then("I see has at least {string} item")
     public void iSeeHasAt1Item(String number) {
         boolean quantityIsVisible = HomePage.elementIsVisible(HomePage.quantityItems);
         String quantity = HomePage.getValueOnInput(HomePage.quantityItems);
 
         Assert.assertTrue(quantityIsVisible);
         Assert.assertTrue(Integer.parseInt(quantity) >= Integer.parseInt(number));
+        quit();
     }
 }

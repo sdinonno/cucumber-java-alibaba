@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class CommonMethods {
     static WebDriver driver;
 
     public CommonMethods(WebDriver driver){
-        this.driver = driver;
+        CommonMethods.driver = driver;
     }
 
     public static void navigate(String url){
@@ -62,7 +64,9 @@ public class CommonMethods {
 
     public static void clickElement(By locator){
         try{
-            findElement(locator).click();
+                Thread.sleep(5000);
+                findElement(locator).click();
+
         }
         catch (Exception e) {
             System.out.println("Error trying to click element.");
@@ -85,6 +89,12 @@ public class CommonMethods {
     public static String getValueOnInput(By locator){
         String valueInput = findElement(locator).getCssValue("value");
         return valueInput;
+    }
+
+    public static void switchNewWindow(){
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
     }
 
 
