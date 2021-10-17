@@ -1,21 +1,17 @@
 package pages;
 
-import framework.CommonMethods;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class HomePage extends CommonMethods {
+public class HomePage  {
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
+    public String mainWindow;
 
-    public static By searchBox = By.id("search-key");
-    public static By searchButton = By.className("search-button");
-    public static By numberPagesButtons = By.xpath("//div[@class = \"next-pagination-list\"]/button");
-    public static By secondProduct = By.xpath("//div[@class=\"top-container\"]/following-sibling::div[1]/div[2]");
-    public static By quantityItems = By.xpath("//div[@class=\"product-quantity-title\"]/following::span//input");
-    public static By dontAllowNotificationsButton = By.xpath("//div[contains(text(), \"Don't allow\")]");
-    public static By closeDiscountButton = By.xpath("//img[@class=\"btn-close\"]");
+    public  By searchBox = By.id("search-key");
+    public  By searchButton = By.className("search-button");
+    public  By numberPagesButtons = By.xpath("//button[contains(@class, \"next-pagination-item\")]");
+    public  By secondProduct = By.xpath("//div[@class=\"top-container\"]/following-sibling::div[1]/div[2]");
+    public  By quantityItems = By.xpath("//div[@class=\"product-quantity-title\"]/following::span//input");
+    public  By dontAllowNotificationsButton = By.xpath("//div[contains(text(), \"Don't allow\")]");
+    public  By closeDiscountButton = By.xpath("//img[@class=\"btn-close\"]");
 
 }
