@@ -122,7 +122,7 @@ public class BaseClass {
                 return driver.getCurrentUrl();
         }
 
-        public String close(){
+        public void close(){
                 driver.close();
         }
 

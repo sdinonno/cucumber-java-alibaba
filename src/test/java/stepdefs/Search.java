@@ -1,55 +1,64 @@
 package stepdefs;
 
+import common.BaseClass;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import pages.HomePage;
-import framework.Base;
 
-import java.util.List;
+import java.util.Set;
 
-public class Search extends Base {
+public class Search extends BaseClass {
+
+    HomePage homePage = new HomePage();
 
 
     @Given("that I am on the Aliexpress website")
     public void thatIAmOnTheAliexpressWebsite() {
-        setUp("https://aliexpress.com/");
-        HomePage.clickElement(HomePage.dontAllowNotificationsButton);
-        HomePage.clickElement(HomePage.closeDiscountButton);
+        setUp(baseURL);
+        clickElement(homePage.dontAllowNotificationsButton);
+        clickElement(homePage.closeDiscountButton);
     }
 
-    @When("I input {string} to search box")
-    public void iInputWordToSearchBox(String word) {
-        HomePage.inputText(HomePage.searchBox, word);
+    @When("I do a search with the word {string}")
+    public void iDoASearchWithTheWordIphone(String word) {
+        inputText(homePage.searchBox, word);
+        clickElement(homePage.searchButton);
     }
 
-    @And("click the search button")
-    public void clickTheSearchButton() {
-        HomePage.clickElement(HomePage.searchButton);
-    }
-
-    @And("click the second page results")
-    public void clickTheSecondPageResults() {
-        List<WebElement> buttons = HomePage.findElements(HomePage.numberPagesButtons);
-        HomePage.clickOnContainingValue(buttons, "2");
+    @And("I go to the second page results")
+    public void iGoToTheSecondPageResults() {
+        String currentURL = getCurrentUrl();
+        navigate(currentURL+"&page=2");
     }
 
     @And("click the second result")
-    public void clickTheSecondResult() {
-        HomePage.clickElement(HomePage.secondProduct);
+    public void clickTheSecondResult() throws InterruptedException {
+        homePage.mainWindow = getWindowHandle();
+        clickElement(homePage.secondProduct);
     }
 
     @Then("I see has at least {string} item")
     public void iSeeHasAt1Item(String number) {
-        boolean quantityIsVisible = HomePage.elementIsVisible(HomePage.quantityItems);
-        String quantity = HomePage.getValueOnInput(HomePage.quantityItems);
 
-        Assert.assertTrue(quantityIsVisible);
-        Assert.assertTrue(Integer.parseInt(quantity) >= Integer.parseInt(number));
+        Set<String> allWindowHandles  = getWindowHandles();
+
+        for (String windowHandle : allWindowHandles){
+            if(!homePage.mainWindow.equals(windowHandle)){
+                switchTo(windowHandle);
+                Assert.assertTrue(elementIsVisible(homePage.quantityItems));
+                String quantity = findElement(homePage.quantityItems).getAttribute("value");
+                Assert.assertTrue(Integer.parseInt(quantity) >= Integer.parseInt(number));
+            }
+
+        }
+
+        switchTo(homePage.mainWindow);
         quit();
+
     }
+
+
 }
