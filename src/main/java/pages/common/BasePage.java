@@ -1,18 +1,16 @@
-package common;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+package pages.common;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Set;
 
-public class BaseClass {
+public class BasePage {
 
         protected WebDriver driver;
         public String baseURL = "https://aliexpress.com/";
 
-        public BaseClass(WebDriver driver) {
+        public BasePage(WebDriver driver) {
                 this.driver = driver;
         }
 
