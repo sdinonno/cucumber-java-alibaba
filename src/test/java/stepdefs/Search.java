@@ -1,17 +1,23 @@
 package stepdefs;
 
+import common.BaseClass;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pages.HomePage;
 
 import java.util.Set;
 
-public class SearchResultsStepDefs {
+public class Search extends BaseClass {
+
+    HomePage homePage = new HomePage();
+
 
     @Given("that I am on the Aliexpress website")
     public void thatIAmOnTheAliexpressWebsite() {
+        setUp(baseURL);
         clickElement(homePage.dontAllowNotificationsButton);
         clickElement(homePage.closeDiscountButton);
     }
@@ -48,7 +54,9 @@ public class SearchResultsStepDefs {
             }
 
         }
+
         switchTo(homePage.mainWindow);
+        quit();
 
     }
 
