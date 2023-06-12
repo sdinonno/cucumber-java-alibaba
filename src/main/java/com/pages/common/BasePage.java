@@ -1,18 +1,17 @@
-package common;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+package com.pages.common;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class BaseClass {
+public class BasePage {
 
         protected WebDriver driver;
         public String baseURL = "https://aliexpress.com/";
 
-        public BaseClass(WebDriver driver) {
+        public BasePage(WebDriver driver) {
                 this.driver = driver;
         }
 
@@ -30,14 +29,6 @@ public class BaseClass {
 
         public boolean elementIsVisible(WebElement element){
                 return element.isDisplayed();
-        }
-
-        public WebElement getElementWithValue(List<WebElement> elements, String valueToBeContained){
-                for (WebElement element : elements) {
-                        if (element.getText().toLowerCase().contains(valueToBeContained.toLowerCase())) {
-                                return element;
-                        }
-                }
         }
 
         public void switchTo(String window){
@@ -58,6 +49,15 @@ public class BaseClass {
 
         public void close(){
                 driver.close();
+        }
+
+        protected WebElement getElementFromList(List<WebElement> elements, String text){
+                for(WebElement e : elements){
+                        if(e.getText().equals(text)){
+                                return e;
+                        }
+                }
+                throw new NoSuchElementException("Cannot find element.");
         }
 }
 
