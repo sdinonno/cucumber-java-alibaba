@@ -45,7 +45,7 @@ public class DriverManager {
 
     private static ChromeOptions setBasicChromeOptions(){
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        //chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         return chromeOptions;

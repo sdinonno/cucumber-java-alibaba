@@ -1,12 +1,11 @@
-package runner;
+package runner.hooks;
 
 import com.managers.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class Hooks {
 
@@ -22,7 +21,8 @@ public class Hooks {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         String url = "https://aliexpress.com/";
-        driver.navigate().to(url);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        driver.get(url);
     }
 
     @After()

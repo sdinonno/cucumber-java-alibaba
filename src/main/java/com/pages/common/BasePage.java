@@ -1,7 +1,12 @@
 package com.pages.common;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -20,10 +25,12 @@ public class BasePage {
         }
 
         public void clickElement(WebElement element){
+                waitElementVisibility(element);
                 element.click();
         }
 
         public void inputText(WebElement element, String text){
+                waitElementVisibility(element);
                 element.sendKeys(text);
         }
 
@@ -58,6 +65,14 @@ public class BasePage {
                         }
                 }
                 throw new NoSuchElementException("Cannot find element.");
+        }
+
+        protected void waitElementVisibility(WebElement element){
+                Wait<WebDriver> wait = new FluentWait<>(driver)
+                        .withTimeout(Duration.ofSeconds(30))
+                        .pollingEvery(Duration.ofSeconds(5))
+                        .ignoring(NoSuchElementException.class);
+                wait.until(t -> element.isDisplayed());
         }
 }
 
