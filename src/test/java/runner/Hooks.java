@@ -10,12 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    private WebDriver driver;
-    private String url = "https://aliexpress.com/";
-
     @Before()
     public void setUp() {
-        driver = DriverManager.createDriver(DriverManager.Browser.CHROME);
+        WebDriver driver = DriverManager.createDriver(DriverManager.Browser.CHROME);
         /*if(Boolean.parseBoolean(ConfigUtil.getConfigs("isMobileView"))){
             Dimension d = new Dimension(390,1020);
             driver.manage().window().setSize(d);
@@ -24,7 +21,7 @@ public class Hooks {
             driver.manage().window().maximize();*/
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        String url = "https://aliexpress.com/";
         driver.navigate().to(url);
     }
 

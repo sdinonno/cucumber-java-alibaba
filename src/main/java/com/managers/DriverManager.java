@@ -46,17 +46,8 @@ public class DriverManager {
     private static ChromeOptions setBasicChromeOptions(){
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
-        Map<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("profile.managed_default_content_settings.ads", 1);
+        chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        chromeOptions.setExperimentalOption("prefs", chromePrefs);
-        chromeOptions.addArguments("--disable-extensions");
-        chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.addArguments("--disable-dev-shm-usage");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--whitelisted-ips");
-        chromeOptions.addArguments("--user-agent='Mozilla/5.0 (X11; Linux x86_64) " +
-                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36");
         return chromeOptions;
     }
 
