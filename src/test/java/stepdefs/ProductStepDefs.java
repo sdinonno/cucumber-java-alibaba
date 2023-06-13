@@ -13,7 +13,6 @@ public class ProductStepDefs {
         testContext = context;
         productPage = context.getPageObjectManager().getProductPage();
     }
-
     @Then("I see that the product has at least one item available")
     public void iSeeTheProductHasAtLeastOneItemAvailable() {
         Assert.assertTrue(productPage.getDefaultQuantity() > 0);
